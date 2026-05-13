@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Inter var", ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, sans-serif;
+
+  --color-ink-50: #f7f7f8;
+  --color-ink-100: #eeeef1;
+  --color-ink-200: #d7d7de;
+  --color-ink-300: #b5b5c0;
+  --color-ink-400: #8b8b99;
+  --color-ink-500: #6b6b78;
+  --color-ink-600: #4e4e59;
+  --color-ink-700: #3a3a44;
+  --color-ink-800: #242430;
+  --color-ink-900: #13131b;
+
+  --color-brand-50: #fffbeb;
+  --color-brand-100: #fef3c7;
+  --color-brand-200: #fde68a;
+  --color-brand-300: #fcd34d;
+  --color-brand-400: #fbbf24;
+  --color-brand-500: #f59e0b;
+  --color-brand-600: #d97706;
+  --color-brand-700: #b45309;
+  --color-brand-800: #92400e;
+  --color-brand-900: #78350f;
+}
+
+/* ---------- Theme tokens (light default) ---------- */
+:root {
+  color-scheme: light;
+
+  --bg-base: #faf8f2;
+  --bg-aurora-1: rgba(251, 191, 36, 0.28);   /* amber */
+  --bg-aurora-2: rgba(236, 72, 153, 0.14);   /* pink */
+  --bg-aurora-3: rgba(14, 165, 233, 0.14);   /* sky */
+
+  --text: #13131b;
+  --text-soft: #4e4e59;
+  --text-muted: #6b6b78;
+  --text-faint: #8b8b99;
+
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.88);
+  --surface-hover: rgba(255, 255, 255, 0.85);
+  --surface-border: rgba(255, 255, 255, 0.55);
+  --surface-ring: rgba(255, 255, 255, 0.9);
+
+  --input-bg: rgba(255, 255, 255, 0.75);
+  --input-border: rgba(15, 15, 27, 0.08);
+  --input-border-focus: #fbbf24;
+  --input-ring-focus: rgba(245, 158, 11, 0.22);
+
+  --chip-bg: rgba(15, 15, 27, 0.05);
+  --chip-text: #3a3a44;
+
+  --divider: rgba(15, 15, 27, 0.08);
+  --shadow: 0 8px 32px rgba(15, 15, 27, 0.06);
+
+  --heat-0: rgba(15, 15, 27, 0.06);
+  --heat-1: rgba(253, 224, 71, 0.55);
+  --heat-2: rgba(251, 191, 36, 0.75);
+  --heat-3: rgba(217, 119, 6, 0.85);
+  --heat-4: #b45309;
+
+  --chart-grid: rgba(15, 15, 27, 0.08);
+  --chart-tick: #6b6b78;
+  --chart-tooltip-bg: rgba(255, 255, 255, 0.95);
+  --chart-tooltip-border: rgba(15, 15, 27, 0.08);
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --bg-base: #0c0a06;
+  --bg-aurora-1: rgba(251, 191, 36, 0.28);
+  --bg-aurora-2: rgba(217, 70, 239, 0.18);
+  --bg-aurora-3: rgba(16, 185, 129, 0.14);
+
+  --text: #ebebf5;
+  --text-soft: #b8b8c8;
+  --text-muted: #8a8aa0;
+  --text-faint: #64647a;
+
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.07);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --surface-ring: rgba(255, 255, 255, 0.12);
+
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --input-border-focus: #fcd34d;
+  --input-ring-focus: rgba(252, 211, 77, 0.22);
+
+  --chip-bg: rgba(255, 255, 255, 0.06);
+  --chip-text: #c4c4d4;
+
+  --divider: rgba(255, 255, 255, 0.08);
+  --shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+
+  --heat-0: rgba(255, 255, 255, 0.04);
+  --heat-1: rgba(251, 191, 36, 0.28);
+  --heat-2: rgba(251, 191, 36, 0.55);
+  --heat-3: rgba(252, 211, 77, 0.8);
+  --heat-4: #fde68a;
+
+  --chart-grid: rgba(255, 255, 255, 0.08);
+  --chart-tick: #8a8aa0;
+  --chart-tooltip-bg: rgba(20, 20, 36, 0.95);
+  --chart-tooltip-border: rgba(255, 255, 255, 0.1);
+}
+
+:root {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  color: var(--text);
+  background: var(--bg-base);
+}
+
+/* Aurora mesh background — sits behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, var(--bg-aurora-1), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, var(--bg-aurora-2), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 50% 100%, var(--bg-aurora-3), transparent 60%);
+  filter: saturate(1.1);
+}
+
+/* ---------- Utility components ---------- */
+@layer components {
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+  .glass-strong {
+    background: var(--surface-strong);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-white transition active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35);
+  }
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.06);
+    box-shadow: 0 8px 22px rgba(217, 119, 6, 0.45);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition active:scale-[0.98];
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .btn-secondary:hover {
+    background: var(--surface-hover);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition;
+    color: var(--text-soft);
+  }
+  .btn-ghost:hover {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .input {
+    @apply w-full rounded-xl px-3.5 py-2.5 text-sm outline-none transition;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .input::placeholder { color: var(--text-faint); }
+  .input:focus {
+    border-color: var(--input-border-focus);
+    box-shadow: 0 0 0 4px var(--input-ring-focus);
+  }
+
+  .label {
+    @apply block text-sm font-medium mb-1.5;
+    color: var(--text-soft);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
+    background: var(--chip-bg);
+    color: var(--chip-text);
+  }
+
+  .divider {
+    border-color: var(--divider) !important;
+  }
+
+  .text-soft { color: var(--text-soft); }
+  .text-muted { color: var(--text-muted); }
+  .text-faint { color: var(--text-faint); }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.3s ease-out; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.35s ease-out; }
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+.animate-pop { animation: pop 0.4s ease-out; }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float { animation: float-slow 3.5s ease-in-out infinite; }
+
+@keyframes aurora-shift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-2%, 1%, 0) scale(1.03); }
+}
+body::before { animation: aurora-shift 22s ease-in-out infinite; }
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+@keyframes orbit-reverse {
+  to { transform: rotate(-360deg); }
+}
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.08); opacity: 0.7; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+/* ---------- Progress ring ---------- */
+.ring-bg { stroke: var(--divider); }
+.ring-fg {
+  stroke: url(#ring-gradient);
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
